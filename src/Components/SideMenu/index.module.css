@@ -1,0 +1,54 @@
+#SideMenu {
+    width: 250px;
+    font-weight: 900;
+    .icon {
+        font-size: 30px;
+        font-weight: 700;
+        color: var(--mainRed);
+        background-color: var(--mainWhite);
+        padding: .2rem;
+        border-radius: .5rem;
+    }
+    #Logo {
+        font-size: 1.5rem;
+        color: var(--mainRed);
+    }
+    .link {
+        padding: 1rem;
+        transition: .3s ease all;
+        &:hover {
+            background-color: #ffb700;
+            border-radius: 1rem;
+            cursor: pointer;
+        }
+    }
+    .activeLink {
+        background-color: var(--mainYellow);
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+    #Profile {  
+        .fa {
+            font-size: 2rem;
+            color: var(--mainRed);
+        }
+        h5 {
+            font-weight: 900;
+        }
+        p {
+            color: var(--mainGrey);
+        }
+        .Btn {
+            font-size: .8rem;
+            background-color: var(--mainWhite);
+            border: .1rem solid var(--mainRed);
+            padding: .5rem 2rem;
+            border-radius: .5rem; 
+            transition: var(--mainTransation);
+            &:hover {
+                background-color: var(--mainRed);
+                color: var(--mainWhite);
+            }
+        }
+    }
+}
