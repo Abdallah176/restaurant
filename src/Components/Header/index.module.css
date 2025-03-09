@@ -1,0 +1,14 @@
+.backBtn {
+    background-color: var(--mainGrey);
+    color: black;
+    font-size: 1rem;
+    border-radius: 6px;
+    width: 2rem;
+    height: 2.2rem;
+    cursor: pointer;
+    transition: var(--mainTransation);
+    padding: 1rem;
+    &:hover {
+        background-color: var(--mainRed);
+    }
+}

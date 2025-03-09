@@ -15,6 +15,7 @@ export default function SideMenu() {
         { id: 4, name: "settings", icon: <LuLayoutDashboard />, path: "/settings" },
     ]);
     const handleLogout = () => { navigate('/login') };
+    const [activeTab,setActiveTab] = useState(0);
 
     return (
         <div className="d-flex flex-column border-end h-100 px-3 pb-5 justify-content-between" id={styles.SideMenu}>
@@ -24,9 +25,15 @@ export default function SideMenu() {
                 <p className='m-0 fs-4'>Samrt<span id={styles.Logo}>POS</span></p>
             </div>
             {
-                links.map((el) => (
+                links.map((el,index) => (
                     // + styles.activeLink
-                    <Link to={el.path} key={el.id} className={"col-12 px-3 nav-link d-flex gap-2 align-items-center " + styles.link + " " }>
+                    <Link onClick={() => (setActiveTab(index))} to={el.path} key={el.id} className=
+                    { 
+                        "col-12 px-3 nav-link d-flex gap-2 align-items-center " 
+                        + styles.link 
+                        + " " 
+                        + (activeTab == index && styles.activeLink)
+                    }>
                     {el.icon}
                     <p className='m-0'>{el.name}</p>
                 </Link>

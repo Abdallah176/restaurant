@@ -1,5 +1,5 @@
 #SideMenu {
-    width: 250px;
+    min-width: 250px;
     font-weight: 900;
     .icon {
         font-size: 30px;
@@ -16,14 +16,15 @@
     .link {
         padding: 1rem;
         transition: .3s ease all;
+        border-radius: 1rem;
         &:hover {
-            background-color: #ffb700;
-            border-radius: 1rem;
+            background-color: var(--mainRed);
+            color: var(--mainWhite);
             cursor: pointer;
         }
     }
     .activeLink {
-        background-color: var(--mainYellow);
+        background-color: var(--mainRed);
         border-radius: 1rem;
         padding: 1rem;
     }
@@ -49,6 +50,10 @@
                 background-color: var(--mainRed);
                 color: var(--mainWhite);
             }
+        }
+        .activeLink {
+            background-color: var(--mainRed);
+            border-radius: 1rem;
         }
     }
 }
