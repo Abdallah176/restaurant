@@ -4,8 +4,9 @@ import SideMenu from "./Components/SideMenu";
 import CategoryProducts from "./assets/Pages/CategoryProducts";
 import { useEffect, useState } from "react";
 import Categories from "./assets/Pages/Categories";
-import { useCategories } from "./Store";
+import { useCart, useCategories } from "./Store";
 import axios from "axios";
+import SideCart from "./Components/SideCart";
 
 export default function App() {
 //   const [categories] = useState([
@@ -19,6 +20,7 @@ export default function App() {
   const { domain,setData } = useCategories();
   const [acceptedRoutes ,setAcceptedRoutes] = useState(["/", "/orders", "/settings", "/bills"]); 
   const [path,setPath] = useState();
+  const {cartIndex} = useCart();
   const Location = useLocation();
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function App() {
     let url = domain + "/api/categories";
     axios.get(url, { params: {populate: "*"}}).then((res) => {
       let cats = res.data.data;
-      let routes = cats.map((el) => ('/orders/' + el.documentId));
+      let routes = cats.map(el => '/orders/' + el.documentId);
       setAcceptedRoutes([...acceptedRoutes , ...routes]);
       setData(cats);
     })
@@ -37,6 +39,7 @@ export default function App() {
 
   return (
     <div className="App col-12 d-flex">
+      {cartIndex && <SideCart />}
       {
         acceptedRoutes.includes(path) && <SideMenu />
       }

@@ -25,3 +25,28 @@ export const useCategories = create ((set) => (
     }
 ));
 
+export const useCart = create((set) => ({
+    cartIndex: false,
+    
+    productsInCart: [
+                    { documentId : 1 , product_name: "iphone x" , product_price: 600 , qty: 3 , product_img: "" },
+                    { documentId : 2 , product_name: "iphone 11" , product_price: 800 , qty: 3 , product_img: "" },
+                    { documentId : 3 , product_name: "iphone 13" , product_price: 1000 , qty: 3 , product_img: "" },
+                ],
+
+    openCart: () => ( set(() => ({cartIndex: true})) ),
+    closeCart: () => ( set(() => ({cartIndex: false})) ),
+
+    decrementQty : (documentId) => ( set((state) => {
+        let copyArray = [...state.productsInCart];
+        let index = copyArray.findIndex(el => el.documentId == documentId);
+        if( copyArray[index].qty > 1 ) {
+            copyArray[index].qty--;
+        } else {
+            copyArray.splice(index,1);
+        }
+        let obj = { productsInCart: copyArray };
+        return obj;
+    }))
+}));
+

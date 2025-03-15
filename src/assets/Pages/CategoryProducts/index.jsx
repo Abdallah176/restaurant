@@ -16,7 +16,18 @@ export default function CategoryProducts() {
         let documentId = params.id;
         let endPoint = `/api/categories/${documentId}`;
         let url = domain + endPoint;
-        axios.get(url , {params: {populate: "*"}}).then((res) => {
+        axios.get(url , {
+            params: 
+                {
+                    populate: {
+                        products: {
+                            populate: "*"
+                        }
+                    }
+
+                }
+        }).then((res) => {
+            console.log(res.data.data)
             setCategoryInfo(res.data.data);
             setCheck(true);
         }).catch(() => {
@@ -30,13 +41,18 @@ export default function CategoryProducts() {
 
     return (
         check && 
-        <div>
+        <div className="flex-grow-1">
             <Header tabName={categoryInfo.category_name} />
             <h1>Products In Category : {categoryInfo.category_name}</h1>
             <div className="col-12 d-flex flex-wrap">
                 {
                     categoryInfo.products && categoryInfo.products.map((el) => (
-                        <ProductCard key={el.documentId} />
+                        <ProductCard 
+                        key={el.documentId} 
+                        name={el.product_name} 
+                        price={el.product_price} 
+                        imgUrl={domain + el.product_img.url}
+                        product={el} />
                     ))
                 }
                 {
