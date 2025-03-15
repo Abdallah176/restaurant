@@ -1,0 +1,9 @@
+.card {
+    background-color: white;
+    transition: var(--mainTransation);
+    &:hover {
+        background-color: var(--mainRed);
+        cursor: pointer;
+        color: white;
+    }
+}

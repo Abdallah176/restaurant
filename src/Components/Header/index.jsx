@@ -1,9 +1,10 @@
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaAngleRight } from "react-icons/fa";
 import styles from "./index.module.css"
 import { useNavigate } from "react-router-dom";
 import { useCategories } from "../../Store";
 import { FaCartArrowDown } from "react-icons/fa6";
+import { IoPlayBack } from "react-icons/io5";
 
 
 export default function Header({ tabName }) {
@@ -14,7 +15,8 @@ export default function Header({ tabName }) {
                 <div className="d-flex align-items-center">
                     {
                         active_cat_id != 0 &&
-                        <FaArrowLeftLong className={styles.backBtn} onClick={() => navigate('/orders')} />
+                        <IoMdArrowRoundBack className={styles.backBtn} onClick={() => navigate('/orders')} />
+                        
                     }
                     <div className='col-12 d-flex align-items-center gap-2'>
                         <p className="m-0">Food & Drinks</p>

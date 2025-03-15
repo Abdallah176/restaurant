@@ -5,6 +5,7 @@ import CategoryProducts from "./assets/Pages/CategoryProducts";
 import { useEffect, useState } from "react";
 import Categories from "./assets/Pages/Categories";
 import { useCategories } from "./Store";
+import axios from "axios";
 
 export default function App() {
 //   const [categories] = useState([
@@ -15,15 +16,24 @@ export default function App() {
 //     { name: "Deserts" , path: "desert" , price: 650},
 //     { name: "Pasta" , path: "pasta" , price: 300},
 // ]);
-  const {data: categories} = useCategories();
-  let catsRoutes = categories.map((el) => { return "/orders/" + el.path});
-  let acceptedRoutes = ["/", "/orders", "/settings", "/bills" , ...catsRoutes]
+  const { domain,setData } = useCategories();
+  const [acceptedRoutes ,setAcceptedRoutes] = useState(["/", "/orders", "/settings", "/bills"]); 
   const [path,setPath] = useState();
   const Location = useLocation();
 
   useEffect(() => {
     setPath(Location.pathname);
   }, [Location.pathname]);
+
+  useEffect(() => {
+    let url = domain + "/api/categories";
+    axios.get(url, { params: {populate: "*"}}).then((res) => {
+      let cats = res.data.data;
+      let routes = cats.map((el) => ('/orders/' + el.documentId));
+      setAcceptedRoutes([...acceptedRoutes , ...routes]);
+      setData(cats);
+    })
+  })
 
   return (
     <div className="App col-12 d-flex">
@@ -33,7 +43,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<DashBoard />}/>
           <Route path="/orders" element={<Categories />}/>
-          <Route path="/orders/:catName" element={<CategoryProducts />}/>
+          <Route path="/orders/:id" element={<CategoryProducts />}/>
           <Route path="/settings" element={<h1>Settings</h1>}/>
           <Route path="/bills" element={<h1>Bills</h1>}/>
           <Route path="/login" element={<h1>Login Page</h1>}/>
