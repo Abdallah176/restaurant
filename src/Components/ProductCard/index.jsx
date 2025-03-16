@@ -1,8 +1,19 @@
+import { useCart } from '../../Store';
 import styles from './index.module.css'
 
 export default function ProductCard({name, price ,imgUrl ,product}) {
+
+    const { addToCart } = useCart();
+
     const handleAdd = () => {
-        console.log(product)
+        let obj = {
+            documentId: product.documentId,
+            product_name: product.product_name,
+            product_price: product.product_price,
+            qty: 1,
+            product_img: imgUrl
+        };
+        addToCart(obj);
     }
 
     return (

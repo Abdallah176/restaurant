@@ -27,15 +27,14 @@ export const useCategories = create ((set) => (
 
 export const useCart = create((set) => ({
     cartIndex: false,
-    
-    productsInCart: [
-                    { documentId : 1 , product_name: "iphone x" , product_price: 600 , qty: 3 , product_img: "" },
-                    { documentId : 2 , product_name: "iphone 11" , product_price: 800 , qty: 3 , product_img: "" },
-                    { documentId : 3 , product_name: "iphone 13" , product_price: 1000 , qty: 3 , product_img: "" },
-                ],
+    productsInCart: [],
+    checkOutIndex: false,
 
     openCart: () => ( set(() => ({cartIndex: true})) ),
     closeCart: () => ( set(() => ({cartIndex: false})) ),
+
+    openCheckOut: () => ( set(() => ({checkOutIndex: true})) ),
+    closeCheckOut: () => ( set(() => ({checkOutIndex: false})) ),
 
     decrementQty : (documentId) => ( set((state) => {
         let copyArray = [...state.productsInCart];
@@ -45,8 +44,29 @@ export const useCart = create((set) => ({
         } else {
             copyArray.splice(index,1);
         }
-        let obj = { productsInCart: copyArray };
-        return obj;
-    }))
+        return { productsInCart: copyArray };
+    })),
+
+    incrementQty : (documentId) => ( set((state) => {
+        let copyArray = [...state.productsInCart];
+        let index = copyArray.findIndex(el => el.documentId == documentId);
+        copyArray[index].qty++;
+        return { productsInCart: copyArray };
+    })),
+
+    addToCart: (product) => (set((state) => {
+        let copy = [...state.productsInCart];
+        let obj = copy.find(el => el.documentId == product.documentId);
+        if (obj) {
+            // increment
+            state.incrementQty(product.documentId);
+        } else {
+            copy.push(product);
+        }
+        return { productsInCart: copy }
+    })),
+
+    resetCart: () => ( set(() => ({ productsInCart: [] })))
+
 }));
 

@@ -26,7 +26,9 @@ export default function Header({ tabName }) {
                 </div>
                 <div className="d-flex align-items-center gap-2">
                     <FaCartArrowDown onClick={openCart}/>
-                    <span className="bg-primary p-2 rounded-5">{productsInCart.length}</span>
+                    <span className="bg-primary p-2 rounded-5">{
+                        productsInCart.reduce((acc,el) => acc + el.qty ,0)
+                    }</span>
                 </div>
             </header>
             

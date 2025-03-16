@@ -17,17 +17,14 @@ export default function CategoryProducts() {
         let endPoint = `/api/categories/${documentId}`;
         let url = domain + endPoint;
         axios.get(url , {
-            params: 
-                {
+            params: {
                     populate: {
                         products: {
                             populate: "*"
                         }
                     }
-
                 }
         }).then((res) => {
-            console.log(res.data.data)
             setCategoryInfo(res.data.data);
             setCheck(true);
         }).catch(() => {

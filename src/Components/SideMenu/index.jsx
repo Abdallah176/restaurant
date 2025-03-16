@@ -1,7 +1,9 @@
 import styles from './index.module.css';
 import { TbCashRegister } from "react-icons/tb";
 import { LuLayoutDashboard } from "react-icons/lu";
-
+import { VscSettings } from "react-icons/vsc";
+import { HiMiniDocumentCurrencyDollar } from "react-icons/hi2";
+import { FaHamburger } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -10,9 +12,9 @@ export default function SideMenu() {
     const navigate = useNavigate();
     const [links] = useState([
         { id: 1, name: "Dashboard", icon: <LuLayoutDashboard />, path: "/" },
-        { id: 2, name: "Food and Drinks", icon: <LuLayoutDashboard />, path: "/orders" },
-        { id: 3, name: "Bills", icon: <LuLayoutDashboard />, path: "/bills" },
-        { id: 4, name: "settings", icon: <LuLayoutDashboard />, path: "/settings" },
+        { id: 2, name: "Food and Drinks", icon: <FaHamburger />, path: "/orders" },
+        { id: 3, name: "Invoices", icon: <HiMiniDocumentCurrencyDollar />, path: "/invoices" },
+        { id: 4, name: "settings", icon: <VscSettings />, path: "/settings" },
     ]);
     const handleLogout = () => { navigate('/login') };
     const [activeTab,setActiveTab] = useState(0);

@@ -7,6 +7,7 @@ import Categories from "./assets/Pages/Categories";
 import { useCart, useCategories } from "./Store";
 import axios from "axios";
 import SideCart from "./Components/SideCart";
+import InvoicesPage from "./assets/Pages/Invoices";
 
 export default function App() {
 //   const [categories] = useState([
@@ -18,7 +19,7 @@ export default function App() {
 //     { name: "Pasta" , path: "pasta" , price: 300},
 // ]);
   const { domain,setData } = useCategories();
-  const [acceptedRoutes ,setAcceptedRoutes] = useState(["/", "/orders", "/settings", "/bills"]); 
+  const [acceptedRoutes ,setAcceptedRoutes] = useState(["/", "/orders", "/settings", "/invoices"]); 
   const [path,setPath] = useState();
   const {cartIndex} = useCart();
   const Location = useLocation();
@@ -45,10 +46,10 @@ export default function App() {
       }
         <Routes>
           <Route path="/" element={<DashBoard />}/>
-          <Route path="/orders" element={<Categories />}/>
+          <Route path="/orders/" element={<Categories />}/>
           <Route path="/orders/:id" element={<CategoryProducts />}/>
           <Route path="/settings" element={<h1>Settings</h1>}/>
-          <Route path="/bills" element={<h1>Bills</h1>}/>
+          <Route path="/invoices" element={<InvoicesPage />}/>
           <Route path="/login" element={<h1>Login Page</h1>}/>
           <Route path="*" element={<h1>Error 404</h1>}/>
         </Routes>
